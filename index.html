@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Watch Out</title>
+<meta name="viewport" content="width=device-width,user-scalable=no">
+  <link rel="stylesheet" href="css/animate.css" type="text/css">
+<link href="css/index.css" rel="stylesheet" type="text/css" />
+  <script>
+      function setupWebViewJavascriptBridge(callback) {
+          if (window.WebViewJavascriptBridge) {
+              return callback(WebViewJavascriptBridge);
+          }
+          if (window.WVJBCallbacks) {
+              return window.WVJBCallbacks.push(callback);
+          }
+          window.WVJBCallbacks = [callback];
+          var WVJBIframe = document.createElement('iframe');
+          WVJBIframe.style.display = 'none';
+          WVJBIframe.src = 'https://__bridge_loaded__';
+          document.documentElement.appendChild(WVJBIframe);
+          setTimeout(function () {
+              document.documentElement.removeChild(WVJBIframe)
+          }, 0)
+      }
+
+      setupWebViewJavascriptBridge(function (bridge) {
+          var uniqueId = 1
+          function log(message, data) {
+              var log = document.getElementById('log')
+              var el = document.createElement('div')
+              el.className = 'logLine'
+              el.innerHTML = uniqueId++ + '. ' + message + ':<br/>' + JSON.stringify(data)
+              if (log.children.length) {
+                  log.insertBefore(el, log.children[0])
+              } else {
+                  log.appendChild(el)
+              }
+          }
+          /*
+              调用ios的
+          */
+          bridge.callHandler('setScreenHoriz', function (responseData) { })
+      })
+      // Andriod 调用方法的时候需要添加 window.android_native 到方法名前面
+      window.android_native.setScreenHoriz();
+  </script>
+  <script>
+      function Rem() {
+          var docEl = document.documentElement,
+              oSize = docEl.clientWidth / 13.34;
+          if (oSize > 100) {
+              oSize = 100;
+          }
+          docEl.style.fontSize = oSize + 'px';
+      }
+      window.addEventListener('resize', Rem, false);
+      Rem();
+  </script>
+</head>
+<body>
+<!-- loading -->
+<div id="loading">
+  <p id="lodingnum">0%</p>
+</div>
+
+<audio preload="load" id="audio1" src="" style="display:none;"></audio>
+<audio preload="load" id="audio2" src="" style="display:none;"></audio>
+<audio preload="load" id="audio4" src="audio/caishiBGM.mp3" style="display:none;" loop></audio>
+
+<img src="images/hengping.png" class="shuping">
+
+<section class="p-index" style="height:750px;display:block;">
+  <section class="m-page m-page1 cur">
+    <div class="m-img m-img1">
+      <!-- homePage -->
+      <div class="start">
+        <p class="logo"></p>
+        <p class="title"></p>
+        <p class="startbut"></p>
+      </div>
+      <!-- /homePage -->
+      <!-- rule -->
+      <div class="page rule">
+        <p></p>
+        <div class="finger"></div>
+      </div>
+      <!-- /rule -->
+      <!-- nav -->
+      <div class="page nav">
+        <img class="bookLeft" src="images/navbook_left.png" />
+        <img class="bookRight" src="images/navbook_right.png" />
+        <img src="images/nav_cloud.png" class="cloud">
+        <p data-iden="wetpaint"></p>
+        <p data-iden="rubbish"></p>
+        <p data-iden="poopee"></p>
+      </div>
+      <!-- /nav -->
+      <!-- wetpaint -->
+      <div class="page wetpaint">
+        <img class="bgLeft" src="images/bg_left.jpg" />
+        <img class="bgRight" src="images/bg_right.jpg" />
+        <div class="page content">
+          <img class="text text_left" src="images/dont_sit_on_it.png" />
+          <img class="text text_right" src="images/sit_on_it.png" />
+          <img class="chair" src="images/chair.png" >
+          <img class="action" src="images/wetpaint.png" >
+          <img class="horse1" src="images/horse1.png">
+          <img class="horse2" src="images/horse5.png">
+          <img class="watchout" src="images/watch_out.png">
+          <p class="horse3"></p>
+          <p class="horse4"></p>
+          <div class="back back1"></div>
+        </div>
+      </div>
+      <!-- /wetpaint -->
+      <!-- rubbish -->
+      <div class="page rubbish">
+        <img class="bgLeft" src="images/bg_left.jpg" />
+        <img class="bgRight" src="images/bg_right.jpg" />
+        <div class="page content">
+          <img class="text text_left" src="images/dont_litter.png" />
+          <img class="text text_right" src="images/litter.png" />
+          <img class="chair" src="images/chair2.png" >
+          <img src="images/rubbishbin.png" class="rubbishbin">
+          <img class="action" src="images/rubbish.png" >
+          <img class="watchout" src="images/watch_out2.png">
+          <img class="dishangrubbish" src="images/dishangrubbish.png" >
+          <img class="flyrubbish" src="images/flyrubbish.png">
+          <img class="birdrubbish" src="images/flyrubbish.png">
+          <img src="images/birdandrubbish.png" class="birdandrubbish">
+          <img class="feng" src="images/feng.png">
+          <p class="xingxing"></p>
+          <p class="ghostrun"><em></em></p>
+          <p class="droprubbish"><em></em></p>
+          <p class="bird"><em></em></p>
+          <div class="back back2"></div>
+        </div>
+      </div>
+      <!-- /rubbish -->
+      <!-- poopee -->
+      <div class="page poopee">
+        <img class="bgLeft" src="images/bg_left.jpg" />
+        <img class="bgRight" src="images/bg_right.jpg" />
+        <div class="page content">
+          <img class="text text_left" src="images/dont_poopee.png" />
+          <img class="text text_right" src="images/poopee.png" />
+          <img class="chair" src="images/chair2.png" >
+          <img class="action" src="images/poopeeaction.png">
+          <img class="watchout" src="images/watch_out2.png">
+          <img class="madeshake" src="images/madeshake.png">
+          <img class="shit" src="images/shit.png">
+          <img class="pigdown" src="images/pigrun3.png">
+          <p class="ghostrun"><em></em></p>
+          <p class="ghostrunright"><em></em></p>
+          <p class="ghostout"><em></em></p>
+          <p class="ghostthinking"></p>
+          <p class="lashi"></p>
+          <p class="pig"><em></em></p>
+          <p class="xingxing"></p>
+          <div class="back back3"></div>
+        </div>
+      </div>
+      <!-- /poopee -->
+
+      <!-- btnBack -->
+      <div class="btnBack"></div>
+      <!-- /btnBack -->
+    </div>
+  </section>
+</section>
+
+<script src="js/jquery-1.9.1.min.js"></script> 
+<script src="js/jquery.imgpreload.min.js"></script>
+<script src="js/index.js"></script>
+</body>
+</html>
